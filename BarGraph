@@ -1,0 +1,43 @@
+from scipy import *
+import scipy as scipy
+import pandas as pd
+import matplotlib.pyplot as plt 
+import csv 
+from numpy import *
+  
+data = 'bruh.csv'
+
+df = pd.read_csv(data)
+
+X = df['% Insufficient Sleep 2022'][1:]
+Y = df['Mentally Unhealthy Days 2022'][1:]
+
+columnlist = list(X)
+columnlist2 = list(Y)
+columnlist.sort()
+columnlist2.sort()
+            
+#mental = data['Mentally Unhealthy Days 2020'][1:]
+#sleep = data['% Insufficient Sleep 2022'][1:]
+
+bins = linspace(30, 45, 7)
+
+bin_means, bin_edges, bin_number = scipy.stats.binned_statistic(X,Y,statistic='mean', bins=7)
+
+print("Bin_means: ", bin_means)
+print("Bins: ", bins)
+plt.bar(bins, bin_means, color='blue', width=2)
+
+
+#plt.hist(X, bins=bins)
+#plt.hist(binned_data, bins=bins, orientation='horizontal')
+
+#plt.scatter(X, Y, color='blue', alpha=0.5)  # Adjust alpha for transparency
+  
+#plt.scatter(X, Y, color = 'g',s = 100) 
+#plt.xticks(rotation = 25) 
+plt.xlabel('% Insufficient Sleep') 
+plt.ylabel('Mentally Unhealthy Days') 
+plt.title('% Insufficient Sleep to Mentally Unhealthy Days 2022') 
+plt.figure(figsize = (5,100))
+plt.show() 
